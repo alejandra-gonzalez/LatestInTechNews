@@ -1,6 +1,8 @@
 package com.example.android.latestintechnews;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHolder>{
+    private Context context;
     private LayoutInflater layoutInflater;
     private ArrayList<Article> articles;
 
@@ -24,6 +27,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
     public ArticleAdapter(Context context, ArrayList<Article> articles) {
         this.layoutInflater = LayoutInflater.from(context);
         this.articles = articles;
+        this.context = context;
     }
 
     /**
@@ -33,7 +37,23 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = layoutInflater.inflate(R.layout.list_item, parent, false);
-        return new ViewHolder(view);
+        final ViewHolder articleViewHolder = new ViewHolder(view);
+
+        // Add onClickListener to the view. When clicked, it sends an intent to a web browser
+        // to open a website with the selected article.
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int currentPosition = articleViewHolder.getAdapterPosition();
+                Uri articleUri = Uri.parse(articles.get(currentPosition).getWebUrl());
+                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, articleUri);
+
+                if (websiteIntent.resolveActivity(context.getPackageManager()) != null) {
+                    context.startActivity(websiteIntent);
+                }
+            }
+        });
+        return articleViewHolder;
     }
 
     /**
