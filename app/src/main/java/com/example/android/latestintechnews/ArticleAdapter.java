@@ -14,6 +14,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHolder>{
     private Context context;
@@ -103,15 +105,37 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
      */
     private String formatDate(String dateString) {
         Date articleDate = null;
-        SimpleDateFormat spf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat spf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
         try {
             articleDate = spf.parse(dateString);
         } catch (ParseException pe){
             pe.printStackTrace();
         }
-        SimpleDateFormat dateFormat = new SimpleDateFormat("LLL dd, yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("LLL dd, yyyy", Locale.US);
         return dateFormat.format(articleDate);
+    }
+
+    /**
+     * Clears the data stored in the adapter.
+     * Reference: https://stackoverflow.com/questions/29978695/remove-all-items-from-recyclerview
+     */
+    public void clear() {
+        final int size = articles.size();
+        if (size > 0) {
+            for (int i = 0; i < size; i++) {
+                articles.remove(0);
+            }
+
+            notifyItemRangeRemoved(0, size);
+        }
+    }
+
+    /**
+     * Adds all data to the adapter.
+     */
+    public void addAll(List<Article> articlesList){
+        articles.addAll(articlesList);
     }
 
 }
