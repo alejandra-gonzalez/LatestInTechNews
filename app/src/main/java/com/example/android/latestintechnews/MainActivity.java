@@ -2,7 +2,10 @@ package com.example.android.latestintechnews;
 
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Context;
 import android.content.Loader;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,22 +34,37 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // This is to set up the RecyclerView.
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        RecyclerView articleListView = findViewById(R.id.list);
-        articleListView.setLayoutManager(linearLayoutManager);
-
         // Initialize variables for empty state and progress bar.
         emptyState = findViewById(R.id.empty_state);
         progressBar = findViewById(R.id.loading_spinner);
 
-        // Initialize and set adapter.
-        adapter = new ArticleAdapter(this, new ArrayList<Article>());
-        articleListView.setAdapter(adapter);
+        // Check for Internet connection.
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        // Start the loader.
-        LoaderManager loaderManager = getLoaderManager();
-        loaderManager.initLoader(ARTICLE_LOADER_ID, null, this);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+
+        if (!isConnected) {
+            // Let user know if they are not connected to the internet.
+            progressBar.setVisibility(View.GONE);
+            emptyState.setText(R.string.no_internet);
+        } else {
+            // This is to set up the RecyclerView.
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+            RecyclerView articleListView = findViewById(R.id.list);
+            articleListView.setLayoutManager(linearLayoutManager);
+
+            // Initialize and set adapter.
+            adapter = new ArticleAdapter(this, new ArrayList<Article>());
+            articleListView.setAdapter(adapter);
+
+            // Start the loader.
+            LoaderManager loaderManager = getLoaderManager();
+            loaderManager.initLoader(ARTICLE_LOADER_ID, null, this);
+        }
+
     }
 
     /**
