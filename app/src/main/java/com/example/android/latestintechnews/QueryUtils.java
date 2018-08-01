@@ -18,7 +18,11 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QueryUtils {
+// Class marked as final so that it cannot be extended.
+final public class QueryUtils {
+
+    // Ensure that instance of this class cannot be created.
+    private QueryUtils(){}
 
     private static final String LOG_TAG = QueryUtils.class.getSimpleName();
 
