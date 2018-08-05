@@ -5,10 +5,13 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -27,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
     private ProgressBar progressBar;
     private static final int ARTICLE_LOADER_ID = 1;
     private static final String GUARDIAN_URL_REQUEST =
-            "https://content.guardianapis.com/search?q=technology&order-by=newest&show-tags=contributor&api-key=0bd554a4-e9c9-4ec8-89e3-7b34fb23d284";
+            "https://content.guardianapis.com/search?q=technology&show-tags=contributor&api-key=0bd554a4-e9c9-4ec8-89e3-7b34fb23d284";
 
     /**
      * Create the MainActivity.
@@ -75,7 +78,15 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
      */
     @Override
     public Loader<List<Article>> onCreateLoader(int i, Bundle bundle) {
-        return new ArticleLoader(this, GUARDIAN_URL_REQUEST);
+        //&order-by=newest
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String orderBy = sharedPrefs.getString(
+                getString(R.string.settings_order_by_key),
+                getString(R.string.settings_order_by_default));
+        Uri baseUri = Uri.parse(GUARDIAN_URL_REQUEST);
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+        uriBuilder.appendQueryParameter("order-by", orderBy);
+        return new ArticleLoader(this, uriBuilder.toString());
     }
 
     /**
