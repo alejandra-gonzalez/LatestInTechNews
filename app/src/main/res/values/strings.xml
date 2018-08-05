@@ -3,4 +3,6 @@
     <string name="no_results">No articles found at the moment. Please try again later.</string>
     <string name="no_internet">No Internet connection detected. Please check your connection and
         try again.</string>
+    <string name="settings_menu_item">Settings</string>
+    <string name="settings_title">Search Settings</string>
 </resources>
