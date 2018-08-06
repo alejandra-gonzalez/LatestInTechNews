@@ -20,4 +20,33 @@
     <string name="settings_order_by_relevance_label">Relevance</string>
     <string name="settings_order_by_relevance_value" translatable="false">relevance</string>
 
+    <!-- Strings For Company Preference -->
+    <string name="settings_filter_by_company_label">Filter By Company</string>
+    <string name="settings_filter_by_company_key" translatable="false">filter_by_company</string>
+    <string name="settings_filter_by_company_default" translatable="false">@string/settings_filter_by_all_value</string>
+
+    <string name="settings_filter_by_all_label">All</string>
+    <string name="settings_filter_by_all_value" translatable="false">technology/technology</string>
+
+    <string name="settings_filter_by_apple_label">Apple</string>
+    <string name="settings_filter_by_apple_value" translatable="false">technology/apple</string>
+
+    <string name="settings_filter_by_facebook_label">Facebook</string>
+    <string name="settings_filter_by_facebook_value" translatable="false">technology/facebook</string>
+
+    <string name="settings_filter_by_ibm_label">IBM</string>
+    <string name="settings_filter_by_ibm_value" translatable="false">technology/ibm</string>
+
+    <string name="settings_filter_by_intel_label">Intel</string>
+    <string name="settings_filter_by_intel_value" translatable="false">technology/intel</string>
+
+    <string name="settings_filter_by_microsoft_label">Microsoft</string>
+    <string name="settings_filter_by_microsoft_value" translatable="false">technology/microsoft</string>
+
+    <string name="settings_filter_by_oracle_label">Oracle</string>
+    <string name="settings_filter_by_oracle_value" translatable="false">technology/oracle</string>
+
+    <string name="settings_filter_by_samsung_label">Samsung</string>
+    <string name="settings_filter_by_samsung_value" translatable="false">technology/samsung</string>
+
 </resources>

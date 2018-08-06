@@ -9,4 +9,11 @@
         android:key="@string/settings_order_by_key"
         android:title="@string/settings_order_by_label"/>
 
+    <android.support.v7.preference.ListPreference
+        android:defaultValue="@string/settings_filter_by_company_default"
+        android:entries="@array/settings_filter_by_company_labels"
+        android:entryValues="@array/settings_filter_by_company_values"
+        android:key="@string/settings_filter_by_company_key"
+        android:title="@string/settings_filter_by_company_label"/>
+
 </android.support.v7.preference.PreferenceScreen>

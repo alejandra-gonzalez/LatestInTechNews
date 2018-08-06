@@ -78,14 +78,17 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
      */
     @Override
     public Loader<List<Article>> onCreateLoader(int i, Bundle bundle) {
-        //&order-by=newest
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         String orderBy = sharedPrefs.getString(
                 getString(R.string.settings_order_by_key),
                 getString(R.string.settings_order_by_default));
+        String filterByCompany = sharedPrefs.getString(
+                getString(R.string.settings_filter_by_company_key),
+                getString(R.string.settings_filter_by_company_default));
         Uri baseUri = Uri.parse(GUARDIAN_URL_REQUEST);
         Uri.Builder uriBuilder = baseUri.buildUpon();
         uriBuilder.appendQueryParameter("order-by", orderBy);
+        uriBuilder.appendQueryParameter("tag", filterByCompany);
         return new ArticleLoader(this, uriBuilder.toString());
     }
 
