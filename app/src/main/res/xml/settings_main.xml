@@ -16,4 +16,11 @@
         android:key="@string/settings_filter_by_company_key"
         android:title="@string/settings_filter_by_company_label"/>
 
+    <android.support.v7.preference.ListPreference
+        android:defaultValue="@string/settings_filter_by_section_default"
+        android:entries="@array/settings_filter_by_section_labels"
+        android:entryValues="@array/settings_filter_by_section_values"
+        android:key="@string/settings_filter_by_section_key"
+        android:title="@string/settings_filter_by_section_label"/>
+
 </android.support.v7.preference.PreferenceScreen>

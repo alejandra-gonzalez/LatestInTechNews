@@ -49,4 +49,29 @@
     <string name="settings_filter_by_samsung_label">Samsung</string>
     <string name="settings_filter_by_samsung_value" translatable="false">technology/samsung</string>
 
+    <!-- Strings For Section Preference -->
+    <string name="settings_filter_by_section_label">Filter By Section</string>
+    <string name="settings_filter_by_section_key" translatable="false">filter_by_section</string>
+    <string name="settings_filter_by_section_default" translatable="false">@string/settings_filter_by_all_label</string>
+    
+    <string name="settings_filter_by_art_label">Art and Design</string>
+    <string name="settings_filter_by_art_value" translatable="false">artanddesign</string>
+
+    <string name="settings_filter_by_books_label">Books</string>
+    <string name="settings_filter_by_books_value" translatable="false">books</string>
+
+    <string name="settings_filter_by_education_label">Education</string>
+    <string name="settings_filter_by_education_value" translatable="false">education</string>
+
+    <string name="settings_filter_by_environment_label">Environment</string>
+    <string name="settings_filter_by_environment_value" translatable="false">environment</string>
+
+    <string name="settings_filter_by_food_label">Food</string>
+    <string name="settings_filter_by_food_value" translatable="false">food</string>
+
+    <string name="settings_filter_by_games_label">Games</string>
+    <string name="settings_filter_by_games_value" translatable="false">games</string>
+
+    <string name="settings_filter_by_technology_label">Technology</string>
+    <string name="settings_filter_by_technology_value" translatable="false">technology</string>
 </resources>

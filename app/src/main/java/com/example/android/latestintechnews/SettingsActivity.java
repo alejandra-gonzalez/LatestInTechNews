@@ -35,6 +35,9 @@ public class SettingsActivity extends AppCompatActivity {
 
             Preference filterByCompany = findPreference(getString(R.string.settings_filter_by_company_key));
             bindPreferenceSummaryToValue(filterByCompany);
+
+            Preference filterBySection = findPreference(getString(R.string.settings_filter_by_section_key));
+            bindPreferenceSummaryToValue(filterBySection);
         }
 
         /**

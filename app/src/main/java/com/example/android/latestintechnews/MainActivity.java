@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -85,10 +86,17 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         String filterByCompany = sharedPrefs.getString(
                 getString(R.string.settings_filter_by_company_key),
                 getString(R.string.settings_filter_by_company_default));
+        String filterBySection = sharedPrefs.getString(
+                getString(R.string.settings_filter_by_section_key),
+                getString(R.string.settings_filter_by_section_default));
         Uri baseUri = Uri.parse(GUARDIAN_URL_REQUEST);
         Uri.Builder uriBuilder = baseUri.buildUpon();
         uriBuilder.appendQueryParameter("order-by", orderBy);
         uriBuilder.appendQueryParameter("tag", filterByCompany);
+        if (!filterBySection.equals(getString(R.string.settings_filter_by_all_label))){
+            uriBuilder.appendQueryParameter("section", filterBySection);
+        }
+        Log.i("MAINACTIVITY", "THIS IS THE URL QUERIED: " +uriBuilder.toString());
         return new ArticleLoader(this, uriBuilder.toString());
     }
 
